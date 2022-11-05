@@ -1,0 +1,110 @@
+What Is Tor and Why Should I Use It?
+Tor is one of the easiest ways to browse the web anonymously. But now that we’ve said the “a” word,
+we need to put a big ol’ asterisk next to it, because using Tor to conceal your online activities
+comes with a bunch of caveats. Let’s take a look at what Tor does, who uses it, and most importantly,
+what Tor won’t do if you’re looking to hide online.
+How Tor works
+Tor is short for The Onion Router (thus the logo) and was initially a worldwide network of servers
+developed with the U.S. Navy that enabled people to browse the internet anonymously. Now, it’s a
+non-profit organization whose main purpose is the research and development of online privacy tools.
+What attacks remain against onion routing?
+As mentioned above, it is possible for an observer who can view both you and either the destination
+website or your Tor exit node to correlate timings of your traffic as it enters the Tor network and
+also as it exits. Tor does not defend against such a threat model. In a more limited sense, note that
+if a censor or law enforcement agency has the ability to obtain specific observation of parts of the
+network, it is possible for them to verify a suspicion that you talk regularly to your friend by
+observing traffic at both ends and correlating the timing of only that traffic. Again, this is only
+useful to verify that parties already suspected of communicating with one another are doing so.
+In most countries, the suspicion required to obtain a warrant already carries more weight than timing
+correlation would provide. Furthermore, since Tor reuses circuits for multiple TCP connections, it is
+possible to associate non-anonymous and anonymous traffic at a given exit node, so be careful about
+what applications you run concurrently over Tor. Perhaps even run separate Tor clients for these applications.
+What protections does Tor provide?
+Internet communication is based on a store-and-forward model that can be understood in analogy to
+postal mail: Data is transmitted in blocks called IP datagrams or packets. Every packet includes
+a source IP address (of the sender) and a destination IP address (of the receiver), just as ordinary
+letters contain postal addresses of sender and receiver. The way from sender to receiver involves
+multiple hops of routers, where each router inspects the destination IP address and forwards the packet
+closer to its destination. Thus, every router between sender and receiver learns that the sender is
+communicating with the receiver. In particular, your local ISP is in the position to build a complete
+profile of your Internet usage. In addition, every server in the Internet that can see any of the
+packets can profile your behavior.
+
+The aim of Tor is to improve your privacy by sending your traffic through a series of proxies.
+Your communication is encrypted in multiple layers and routed via multiple hops through the Tor
+network to the final receiver. More details on this process can be found in this visualization.
+Note that all your local ISP can observe now is that you are communicating with Tor nodes. Similarly,
+servers in the Internet just see that they are being contacted by Tor nodes. Generally speaking,
+Tor aims to solve three privacy problems:
+First, Tor prevents websites and other services from learning your location, which they can use to
+build databases about your habits and interests. With Tor, your Internet connections don't give you
+away by default -- now you can have the ability to choose, for each connection, how much information
+to reveal.
+Second, Tor prevents people watching your traffic locally (such as your ISP or someone with access
+to your home wi-fi or router) from learning what information you're fetching and where you're fetching
+it from. It also stops them from deciding what you're allowed to learn and publish -- if you can get to
+any part of the Tor network, you can reach any site on the Internet.
+Third, Tor routes your connection through more than one Tor relay so no single relay can learn what
+you're up to. Because these relays are run by different individuals or organizations, distributing
+trust provides more security than the old one hop proxy approach. Note, however, that there are
+situations where Tor fails to solve these privacy problems entirely: see the entry below on remaining
+attacks.
+Why is it called Tor?
+Tor is the onion routing network. When we were starting the new next-generation design and implementation
+of onion routing in 2001-2002, we would tell people we were working on onion routing, and they would
+say "Neat. Which one?" Even if onion routing has become a standard household term, Tor was born out
+of the actual onion routing project run by the Naval Research Lab.(It's also got a fine meaning in German and Turkish.)
+Note: even though it originally came from an acronym, Tor is not spelled "TOR". Only the first letter
+is capitalized. In fact, we can usually spot people who haven't read any of our website
+(and have instead learned everything they know about Tor from news articles) by the fact that they
+spell it wrong.
+Does Tor remove personal information from the data my application sends?
+No, it doesn't. You need to use a separate program that understands your application and protocol
+and knows how to clean or "scrub" the data it sends. Tor Browser tries to keep application-level data,
+like the user-agent string, uniform for all users. Tor Browser can't do anything about the text that
+you type into forms, though.
+How is Tor different from other proxies?
+A typical proxy provider sets up a server somewhere on the Internet and allows you to use it to relay
+your traffic. This creates a simple, easy to maintain architecture. The users all enter and leave
+through the same server. The provider may charge for use of the proxy, or fund their costs through
+advertisements on the server. In the simplest configuration, you don't have to install anything.
+You just have to point your browser at their proxy server. Simple proxy providers are fine solutions
+if you do not want protections for your privacy and anonymity online and you trust the provider to not
+do bad things. Some simple proxy providers use SSL to secure your connection to them, which protects
+you against local eavesdroppers, such as those at a cafe with free wi-fi Internet.
+Simple proxy providers also create a single point of failure. The provider knows both who you are
+and what you browse on the Internet. They can see your traffic as it passes through their server.
+In some cases, they can even see inside your encrypted traffic as they relay it to your banking site
+or to ecommerce stores. You have to trust the provider isn't watching your traffic, injecting their
+own advertisements into your traffic stream, or recording your personal details.
+
+Tor passes your traffic through at least 3 different servers before sending it on to the destination.
+Because there's a separate layer of encryption for each of the three relays, somebody watching your
+Internet connection can't modify, or read, what you are sending into the Tor network. Your traffic is
+encrypted between the Tor client (on your computer) and where it pops out somewhere else in the world.
+Doesn't the first server see who I am?
+Possibly. A bad first of three servers can see encrypted Tor traffic coming from your computer.
+It still doesn't know who you are and what you are doing over Tor. It merely sees "This IP address
+is using Tor". You are still protected from this node figuring out both who you are and where you are
+going on the Internet.
+Can't the third server see my traffic?
+Possibly. A bad third of three servers can see the traffic you sent into Tor. It won't know who sent
+this traffic. If you're using encryption (like HTTPS), it will only know the destination. See this
+visualization of Tor and HTTPS to understand how Tor and HTTPS interact.
+Can I distribute Tor?
+Yes.
+The Tor software is free software. This means we give you the rights to redistribute the Tor software,
+either modified or unmodified, either for a fee or gratis. You don't have to ask us for specific
+permission.
+However, if you want to redistribute the Tor software you must follow our LICENSE. Essentially
+this means that you need to include our LICENSE file along with whatever part of the Tor software
+you're distributing.
+Most people who ask us this question don't want to distribute just the Tor software, though.
+They want to distribute the Tor Browser. This includes Firefox Extended Support Release and the
+NoScript extension. You will need to follow the license for those programs as well. Both of those
+Firefox extensions are distributed under the GNU General Public License, while Firefox ESR is released
+under the Mozilla Public License. The simplest way to obey their licenses is to include the source
+code for these programs everywhere you include the bundles themselves.
+Also, you should make sure not to confuse your readers about what Tor is, who makes it, and what
+properties it provides (and doesn't provide). See our trademark FAQ for details.
+
